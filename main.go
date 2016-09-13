@@ -4,6 +4,7 @@ import (
 	"crypto/sha512"
 	"encoding/base64"
 	"fmt"
+	"net"
 	"net/http"
 	"time"
 )
@@ -33,6 +34,15 @@ func HashHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	server := &http.Server {Addr: ":8080"}
+	listener, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		fmt.Println("Error listening:", err.Error())
+	}
+
 	http.HandleFunc("/", HashHandler)
-	http.ListenAndServe(":8080", nil)
+	err = server.Serve(listener)
+	if err != nil {
+		fmt.Println("Error Serving:", err.Error())
+	}
 }

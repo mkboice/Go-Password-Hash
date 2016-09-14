@@ -34,7 +34,7 @@ func HashHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	server := &http.Server {Addr: ":8080"}
+	server := &http.Server{Addr: ":8080"}
 	listener, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
